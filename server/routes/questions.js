@@ -9,6 +9,6 @@ router.get("/getquestionbyid" , getQuestionById)
 router.post("/askquestion" ,isLoggedIn , createNewQuestion)
 router.put("/updateupvote" ,isLoggedIn , updateUpvote)
 router.put("/updatedownvote" ,isLoggedIn , updateDownvote)
-router.post("/addcomment" ,isLoggedIn , addCommentToQuestion)
+router.put("/addcomment" ,isLoggedIn , addCommentToQuestion)
 
 module.exports = router

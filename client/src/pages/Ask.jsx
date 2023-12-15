@@ -21,8 +21,7 @@ function Ask() {
             tags: tagsArray
         }
         try {
-            const res = await axios.post("http://localhost:4000/question/askquestion", data, { withCredentials: true })
-            console.log(res);
+            await axios.post("http://localhost:4000/question/askquestion", data, { withCredentials: true })
             navigate("/home")
         } catch (error) {
             alert(error)

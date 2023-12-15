@@ -1,16 +1,9 @@
 const mongoose = require("mongoose");
 
 const answerSChema = new mongoose.Schema({
-    title:{
-        type:String,
-        required:true
-    },
     body:{
         type:String,
         required:true
-    },
-    code:{
-        type:String,
     },
     upvotes:{
         type:Number,
@@ -19,6 +12,11 @@ const answerSChema = new mongoose.Schema({
     downvotes:{
         type:Number,
         default:0
+    },
+    correct:{
+        type:Boolean,
+        default:false,
+        required:false
     },
     questionId:{
         type: mongoose.Types.ObjectId,

@@ -48,7 +48,20 @@ exports.createNewQuestion = async(req , res)=>{
 exports.getQuestionById = async(req,res)=>{
     try {
         const questionId = req.query.q
-        const question = await QuestionModel.findById(questionId).populate("comments")
+        const question = await QuestionModel.findById(questionId).populate([{
+            path: 'comments',
+            model: 'Comments',
+            populate: {
+                path: 'userId',
+                model: 'Users',
+                select: 'firstname lastname'
+            }
+        },
+        {
+            path: 'answers',
+            model: 'Answers',
+        }
+    ])
         res.status(200).json(question)
     } catch (error) {
         res.status(500).json({message:"Internal server error"})

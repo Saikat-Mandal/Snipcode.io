@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./routes/user")
 const questionRoutes = require("./routes/questions")
-// const answersRoutes = require("./routes/answers")
+const answersRoutes = require("./routes/answers")
 const app = express();
 
 // middlewares 
@@ -31,10 +31,10 @@ mongoose
 // routes 
 app.use("/auth" ,authRoutes)
 app.use("/question" ,questionRoutes)
-// app.use("answer" ,answersRoutes)
+app.use("/answer" ,answersRoutes)
 
 
 // app listen
 app.listen(process.env.PORT, () =>
-  console.log(`listning to port ${process.env.PORT}`)
+  console.log(`listening to port ${process.env.PORT}`)
 );
