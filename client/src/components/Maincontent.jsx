@@ -55,6 +55,7 @@ function Maincontent() {
                             body={item.body}
                             votes={item.upvotes + item.downvotes}
                             comments={item.comments.length}
+                            tags={item.tags}
                             handleId={particularQuestion}
                         />
                     })

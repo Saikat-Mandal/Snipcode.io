@@ -1,3 +1,4 @@
+const CommentModel = require("../models/Comments")
 const QuestionModel = require("../models/Question")
 const UserModel = require("../models/user")
 
@@ -23,13 +24,13 @@ exports.getUserQuestionsController = async(req , res)=>{
 // post a new question for a specific user 
 exports.createNewQuestion = async(req , res)=>{
     try {
-        const {title , body} = req.body
+        const {title , body , tags} = req.body
         const id = req.token.id
 
         const newQuestion = {
             title : title,
             body:body,
-            tags:[],
+            tags:tags,
             userId:id,
             answers:[],
             comments:[]
@@ -47,7 +48,7 @@ exports.createNewQuestion = async(req , res)=>{
 exports.getQuestionById = async(req,res)=>{
     try {
         const questionId = req.query.q
-        const question = await QuestionModel.findById(questionId)
+        const question = await QuestionModel.findById(questionId).populate("comments")
         res.status(200).json(question)
     } catch (error) {
         res.status(500).json({message:"Internal server error"})
@@ -73,5 +74,32 @@ exports.updateDownvote = async(req,res)=>{
         res.status(200).json({message :"Added downvote"})
     } catch (error) {
         res.status(500).json({message:"Internal server error"})
+    }
+}
+
+
+// add a commment to quesiton 
+exports.addCommentToQuestion=async(req,res)=>{
+    try {
+        const userId = req.token.id
+        const{id , comment} = req.body
+        const newCommentObj = {
+            comment : comment,
+            userId:userId
+        }
+        
+        const newComment = await CommentModel.create(newCommentObj) 
+        // after the new comment is created 
+        const question = await QuestionModel.findById(id)
+        if (!question) {
+            return res.status(404).json({ message: 'Question not found' });
+          }
+        question.comments.push(newComment._id)
+        await question.save();
+        res.status(200).json({message : "Comment added successfully" } )
+      
+
+    } catch (error) {
+        res.status(500).json({message:"Internal server error for adding comment"})
     }
 }

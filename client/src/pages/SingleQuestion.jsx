@@ -5,6 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { IoMdThumbsUp, IoMdThumbsDown } from "react-icons/io";
 import axios from 'axios'
+import Comments from '../components/Comments';
 
 function SingleQuestion() {
     const location = useLocation()
@@ -14,6 +15,8 @@ function SingleQuestion() {
     const [question, setQuestion] = useState(null)
     const [thisBody, setThisBody] = useState('');
     const [refresh, setRefresh] = useState(false);
+    // const [commentsArray, setCommentsArray] = useState([])
+    const [comment, setComment] = useState("")
 
     useEffect(() => {
         const getQuestion = async () => {
@@ -46,7 +49,7 @@ function SingleQuestion() {
             const data = {
                 id: questionId
             }
-            const res = await axios.put("http://localhost:4000/question/updatedownvote", data, { withCredentials: true })
+            await axios.put("http://localhost:4000/question/updatedownvote", data, { withCredentials: true })
             setRefresh(prev => !prev)
         } catch (error) {
             alert(error)
@@ -56,7 +59,13 @@ function SingleQuestion() {
     // post comment  
     const postComment = async () => {
         try {
-
+            const data = {
+                comment: comment,
+                id: questionId
+            }
+            axios.post("http://localhost:4000/question/addcomment", data, { withCredentials: true })
+            setComment("")
+            setRefresh(prev => !prev)
         } catch (error) {
             alert(error)
         }
@@ -70,7 +79,7 @@ function SingleQuestion() {
         }
     }
 
-
+    console.log(question);
     return (
         <Home>
 
@@ -103,13 +112,19 @@ function SingleQuestion() {
                         <p className='py-3'>Comments:  </p>
                         <div>
                             {question.comments.length > 0 ? question.comments.map(item => {
-                                return <p>{item}</p>
+                                return <Comments
+                                    key={item.id}
+                                    title={item.comment}
+                                    createdAt={item.createdAt}
+                                    updatedAt={item.updatedAt}
+                                    user={item.userId}
+                                />
                             }) : <p className='text-xs text-gray-400' >No comments yet</p>}
                         </div>
                         {/* add a comment  */}
                         <div className='pt-4 '>
-                            <input className=' rounded-full text-xs p-2 border' placeholder='Add a comment...' />
-                            <button className=' px-3 py-1 text-xs hover:scale-105 bg-blue-600 text-white rounded-full ml-3'>Add</button>
+                            <input value={comment} onChange={(e) => setComment(e.target.value)} className=' rounded-full text-xs p-2 border' placeholder='Add a comment...' />
+                            <button onClick={postComment} className=' px-3 py-1 text-xs hover:scale-105 bg-blue-600 text-white rounded-full ml-3'>Add</button>
                         </div>
                         {/* answer  */}
                         <div className='py-4'>

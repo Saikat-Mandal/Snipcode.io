@@ -39,7 +39,7 @@ const questionSchema = new mongoose.Schema({
     comments:[
         {
             type:mongoose.Types.ObjectId,
-            ref:"Users",
+            ref:"Comments",
             required:false
         }
     ],
