@@ -15,7 +15,7 @@ function Question(props) {
                 <div className='py-3'>{htmlToText(props.body).slice(0, 200)}...</div>
             </div>
             <div className='py-2 flex gap-x-3'>
-                {props.tags.map(item => <Tags text={item} />)}
+                {props.tags.map((item, index) => <Tags key={index} text={item} />)}
             </div>
             <div className='flex gap-x-4 py-4 text-gray-400'>
                 <div className='flex items-center gap-x-2 text-orange-600'>

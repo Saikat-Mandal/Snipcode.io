@@ -80,3 +80,13 @@ exports.getAllUsers = async(req,res)=>{
     res.status(500).json({message:"Internal server error"})
   }
 }
+
+exports.getUserById = async(req,res)=>{
+  try {
+    const userId = req.token.id
+    const user = await UserModel.findById(userId)
+    return res.status(200).json(user)
+  } catch (error) {
+    res.status(500).json({message:"Internal server error"})
+  }
+}

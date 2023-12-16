@@ -87,6 +87,45 @@ function SingleQuestion() {
         }
     }
 
+    // is answer correct 
+    const isAnswerCorrect = async (id) => {
+        try {
+            const data = {
+                answerId: id
+            }
+            await axios.put("http://localhost:4000/answer/makeanswercorrect", data, { withCredentials: true })
+            setRefresh(prev => !prev)
+        } catch (error) {
+            alert(error)
+        }
+    }
+
+    // add upvote to answer
+    const upvoteAnswer = async (id) => {
+        try {
+            const data = {
+                answerId: id
+            }
+            await axios.put("http://localhost:4000/answer/answerupvote", data, { withCredentials: true })
+            setRefresh(prev => !prev)
+        } catch (error) {
+            alert(error)
+        }
+    }
+
+    // add downvote to answer
+    const downvoteAnswer = async (id) => {
+        try {
+            const data = {
+                answerId: id
+            }
+            await axios.put("http://localhost:4000/answer/answerdownvote", data, { withCredentials: true })
+            setRefresh(prev => !prev)
+        } catch (error) {
+            alert(error)
+        }
+    }
+
 
     return (
         <Home>
@@ -105,7 +144,7 @@ function SingleQuestion() {
                         </div>
                         <div className='flex items-center gap-x-4 text-2xl'>
                             <span onClick={updateVote} className=' cursor-pointer hover:scale-110'><IoMdThumbsUp /></span>
-                            <p>{question.upvotes - question.downvotes}</p>
+                            <p>{question.upvotes + question.downvotes}</p>
                             <span onClick={downvote} className=' cursor-pointer hover:scale-110'> <IoMdThumbsDown /></span>
                         </div>
                     </div>
@@ -132,6 +171,10 @@ function SingleQuestion() {
                                         correct={item.correct}
                                         createdAt={item.createdAt}
                                         updatedAt={item.updatedAt}
+                                        isAnswerCorrect={isAnswerCorrect}
+                                        updateVote={upvoteAnswer}
+                                        downVote={downvoteAnswer}
+                                        user={item.userId.firstname + " " + item.userId.lastname}
                                     />
                                 }) : <p className='text-xs text-gray-400' >No comments yet</p>}
                             </div>

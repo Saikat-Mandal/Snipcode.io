@@ -60,6 +60,11 @@ exports.getQuestionById = async(req,res)=>{
         {
             path: 'answers',
             model: 'Answers',
+            populate: {
+                path: 'userId',
+                model: 'Users',
+                select: 'firstname lastname'
+            }
         }
     ])
         res.status(200).json(question)
@@ -83,7 +88,7 @@ exports.updateDownvote = async(req,res)=>{
     try {
         const {id} = req.body
         const question = await QuestionModel.findById(id)
-        await QuestionModel.updateOne({_id:id} , { $set: { upvotes: question.upvotes-1 }})
+        await QuestionModel.updateOne({_id:id} , { $set: { downvotes: question.downvotes-1 }})
         res.status(200).json({message :"Added downvote"})
     } catch (error) {
         res.status(500).json({message:"Internal server error"})
