@@ -176,7 +176,7 @@ function SingleQuestion() {
                                         downVote={downvoteAnswer}
                                         user={item.userId.firstname + " " + item.userId.lastname}
                                     />
-                                }) : <p className='text-xs text-gray-400' >No comments yet</p>}
+                                }) : <p className='text-xs text-gray-400' >No answers yet</p>}
                             </div>
                             <p>Add an answer:</p>
                             <div className=' w-full h-60 object-contain overflow-auto'>

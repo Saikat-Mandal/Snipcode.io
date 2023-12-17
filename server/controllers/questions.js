@@ -37,7 +37,10 @@ exports.createNewQuestion = async(req , res)=>{
         }
 
         const createQuestion = await QuestionModel.create(newQuestion)
-
+        const userId = req.token.id
+        const user = await UserModel.findById(userId)
+         user.questions.push(createQuestion._id)
+         await user.save()
         res.send({message:"New question created !" , createQuestion})
     } catch (error) {
         res.status(500).json({message:"Internal server error"})

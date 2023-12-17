@@ -1,5 +1,6 @@
 const AnswerModel = require("../models/Answers")
 const QuestionModel = require("../models/Question")
+const UserModel = require("../models/user")
 
 
 // post a new answer 
@@ -13,12 +14,15 @@ exports.postAnswerController = async(req,res)=>{
             questionId:questionId,
             userId : userId
         }
-
+        const user = await UserModel.findById(userId)
         const newAnwer = await AnswerModel.create(answerObj)
         const question = await QuestionModel.findById(questionId)
 
         question.answers.push(newAnwer._id)
-         await question.save()
+        await question.save()
+        user.answers.push(newAnwer._id) 
+        await user.save()
+
         
         res.status(200).json({message:"Answer posted"}) 
     } catch (error) {
@@ -32,8 +36,15 @@ exports.postAnswerController = async(req,res)=>{
 exports.makeAnswerCorrect = async(req,res)=>{
     try {
         const{ answerId} = req.body
+        const userId = req.token.id
         const answer = await AnswerModel.findById(answerId)
+        const questionId = answer.questionId
+        const user = await UserModel.findById(userId)
 
+        if(!user.questions.includes(questionId)){
+            return res.status(300).json({message : "Restricted from making change"})
+        }
+        
         await AnswerModel.updateOne({_id : answerId} , {
             $set : {
                 correct : !answer.correct

@@ -39,33 +39,15 @@ function Dashboard() {
         {
             id: 1,
             title: "Summary",
-            onClick: null
+            path: "/dashboard/summary"
         },
-        {
-            id: 2,
-            title: "Answers",
-            onClick: null
-        },
-        {
-            id: 3,
-            title: "Questions",
-            onClick: null
-        },
-        {
-            id: 4,
-            title: "Votes",
-            onClick: null
-        },
+
         {
             id: 5,
             title: "Settings",
-            onClick: null
+            path: "/dashboard/settings"
         },
-        {
-            id: 6,
-            title: "Logout",
-            onClick: onLogout
-        },
+
     ]
     return (
         <Layout>
@@ -78,11 +60,11 @@ function Dashboard() {
                             <div className=' h-64 w-64 border-2'>
                                 <img src={user.dp} alt="" />
                             </div>
-                            <ul className='py-6'>
+                            <ul className='py-6 flex flex-col'>
                                 {
-                                    data.map(item => <Profiletabs key={item.id} title={item.title} onClick={item.onClick} />)
+                                    data.map(item => <Profiletabs key={item.id} title={item.title} path={item.path} />)
                                 }
-
+                                <li onClick={onLogout} className='py-1 rounded-full hover:bg-slate-200 px-2 cursor-pointer'>Logout</li>
                             </ul>
                         </div>
                         <div className='w-3/4 p-4'>
