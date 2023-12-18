@@ -2,6 +2,7 @@ import React from 'react'
 import { FaRegMessage, FaTrophy } from "react-icons/fa6";
 import { IoSearchSharp } from "react-icons/io5";
 import { PiArrowsInCardinalBold } from "react-icons/pi";
+import { IoSunny } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 function Header() {
     return (
@@ -11,7 +12,8 @@ function Header() {
                 <IoSearchSharp className='ml-4 text-orange-600' />
                 <input type="text" placeholder='search ' className='w-full outline-none' />
             </div>
-            <div className=' flex justify-end gap-x-6 items-center w-1/3'>
+            <div className=' flex justify-end gap-x-6 items-center w-1/3 cursor-pointer'>
+                <IoSunny />
                 <FaRegMessage />
                 <FaTrophy />
                 <Link to="/dashboard" className='h-10 w-10 border-2 border-gray-400 rounded-full'>
