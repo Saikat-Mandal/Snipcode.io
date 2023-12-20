@@ -4,6 +4,7 @@ import MinibarTabs from './MinibarTabs'
 import Question from './Question'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 function Maincontent() {
 
@@ -30,9 +31,12 @@ function Maincontent() {
         navigate(`/question/${id}`, { state: { key: id } })
     }
 
+    const darkMode = useSelector(state => state.darkMode)
+    const backgroundColor = darkMode && " bg-zinc-950"
+    const textColor = darkMode && " text-white"
 
     return (
-        <div className=' w-3/5 h-screen overflow-auto'>
+        <div className={backgroundColor + textColor + ' w-3/5 h-screen overflow-auto rounded-xl p-4'}>
             <h1 className='px-4 text-3xl text-gray-600 pb-4'> Top Questions </h1>
 
             <div className='px-4 flex items-center justify-between '>

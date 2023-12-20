@@ -4,15 +4,20 @@ import Profiletabs from '../components/Profiletabs'
 import image from "../assets/shopping.png"
 import axios from 'axios';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { removeToken } from '../feature/todo/userSlice';
 function Dashboard() {
     const navigate = useNavigate()
 
     const [user, setUser] = useState(null)
 
+    const dispatch = useDispatch()
+
     // logout function 
     const onLogout = async () => {
         try {
             await axios.get("http://localhost:4000/auth/logout", { withCredentials: true })
+            dispatch(removeToken())
             navigate("/")
         } catch (error) {
             alert(error)

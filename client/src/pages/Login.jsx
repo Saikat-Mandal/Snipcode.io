@@ -27,7 +27,6 @@ function Login() {
         try {
             const res = await axios.post("http://localhost:4000/auth/login", data, { withCredentials: true })
             alert(res.data.message)
-            console.log(res.data)
             dispatch(updateToken(res.data.token))
             navigate("/home")
         } catch (error) {
