@@ -4,7 +4,13 @@ import { IoSearchSharp } from "react-icons/io5";
 import { PiArrowsInCardinalBold } from "react-icons/pi";
 import { IoSunny } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux"
+
+
 function Header() {
+
+    const token = useSelector(state => state.token)
+
     return (
         <header className=' p-6  flex items-center w-full'>
             <Link to="/home" className='w-1/3 text-sm flex items-center gap-x-1'> <span className='text-2xl'><PiArrowsInCardinalBold /></span>Snipcode.io</Link>

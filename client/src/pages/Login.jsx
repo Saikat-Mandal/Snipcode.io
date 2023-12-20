@@ -3,6 +3,8 @@ import { Container, TextField, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import Layout from '../containers/Layout'
 import Button from '../components/Button';
+import { useDispatch } from "react-redux"
+import { updateToken } from "../feature/todo/userSlice"
 import axios from 'axios';
 
 function Login() {
@@ -10,8 +12,10 @@ function Login() {
     // states for storing email and password 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const dispatch = useDispatch()
 
     const navigate = useNavigate()
+
 
     // register function 
     const onLogin = async () => {
@@ -23,7 +27,8 @@ function Login() {
         try {
             const res = await axios.post("http://localhost:4000/auth/login", data, { withCredentials: true })
             alert(res.data.message)
-            window.localStorage.setItem("userId", res.data.id)
+            console.log(res.data)
+            dispatch(updateToken(res.data.token))
             navigate("/home")
         } catch (error) {
             alert(error)

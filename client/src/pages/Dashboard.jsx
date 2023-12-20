@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../containers/Layout'
 import Profiletabs from '../components/Profiletabs'
-import { GrLocation } from "react-icons/gr";
-import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import image from "../assets/shopping.png"
 import axios from 'axios';
 import { Outlet, useNavigate } from 'react-router-dom';
@@ -15,7 +13,6 @@ function Dashboard() {
     const onLogout = async () => {
         try {
             await axios.get("http://localhost:4000/auth/logout", { withCredentials: true })
-            localStorage.removeItem("userId");
             navigate("/")
         } catch (error) {
             alert(error)
@@ -77,26 +74,3 @@ function Dashboard() {
 
 export default Dashboard
 
-{/* <div className='w-3/4 p-4'>
-<h1 className='text-5xl'>{user.firstname + " " + user.lastname}</h1>
-<div className='flex items-center py-4 gap-x-4'>
-    <div className='flex items-center gap-x-2 text-orange-600'>
-        <LiaBirthdayCakeSolid />
-        <p className='text-gray-600'>{user.createdAt}</p>
-    </div>
-    <div className='flex items-center gap-x-2 text-orange-600'>
-        <GrLocation />
-        <p className='text-gray-600'>Pune</p>
-    </div>
-</div>
-
-<div className='mt-4'>
-    <div className=''>
-        <h1 className='text-2xl' >Stars</h1>
-    </div>
-
-    <div className=' h-64  border-2 p-4'>
-        <p className=' text-gray-500 text-sm'>Please contribute more to earn stars..</p>
-    </div>
-</div>
-</div> */}
