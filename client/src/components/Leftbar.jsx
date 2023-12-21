@@ -11,7 +11,7 @@ function Leftbar() {
     const backgroundColor = darkMode && " bg-zinc-900"
     const textColor = darkMode && " text-white"
     return (
-        <div className={backgroundColor + textColor + ' w-1/5'}>
+        <div className={backgroundColor + textColor + ' w-1/5 transition duration-4000 ease-in'}>
             <Tabs icon={<RiHomeLine />} title="Home" path="/home" />
             <Tabs icon={<BsFillQuestionCircleFill />} title="Questions" path="/questions" />
             <Tabs icon={<TbTagStarred />} title="Tags" path="/tags" />

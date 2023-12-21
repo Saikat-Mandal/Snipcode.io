@@ -12,7 +12,6 @@ function Register() {
     const [firstname, setFirstname] = useState("")
     const [lastname, setLastname] = useState("")
     const [username, setUsername] = useState("")
-    const [errors, setErrors] = useState("");
 
     const navigate = useNavigate()
 
@@ -27,7 +26,6 @@ function Register() {
         }
         try {
             const res = await axios.post("http://localhost:4000/auth/register", data, { withCredentials: true })
-            console.log(res);
             alert(res.data.message)
             navigate("/")
         } catch (error) {
@@ -48,77 +46,13 @@ function Register() {
                                 Sign up
                             </Typography>
                             <form onSubmit={onSignUp} >
-                                <TextField
-                                    required
-                                    label="Email"
-                                    variant="outlined"
-                                    fullWidth
-                                    margin="normal"
-                                    name="email"
-                                    type="email"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    value={email}
-                                    className={" text-white font-normal"}
-                                />
-                                <TextField
-                                    required
-                                    label="Username"
-                                    variant="outlined"
-                                    fullWidth
-                                    margin="normal"
-                                    name="username"
-                                    type="text"
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    value={username}
-                                    className={" text-white font-normal"}
-                                />
-                                <TextField
-                                    required
-                                    label="Password"
-                                    variant="outlined"
-                                    fullWidth
-                                    margin="normal"
-                                    name="password"
-                                    type="password"
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    value={password}
-                                    className={" font-normal"}
-                                />
-                                <TextField
-                                    required
-                                    label="Confirm password"
-                                    variant="outlined"
-                                    fullWidth
-                                    margin="normal"
-                                    name="confirm password"
-                                    type="password"
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                    value={confirmPassword}
-                                    className={" font-normal"}
-                                />
+                                <input value={email} onChange={(e) => setEmail(e.target.value)} className='px-4 my-2 bg-transparent outline-none border-2 border-gray-500 rounded-full p-2 w-full' type="text" placeholder='Email*' />
+                                <input value={username} onChange={(e) => setUsername(e.target.value)} className='px-4 my-2 bg-transparent outline-none border-2 border-gray-500 rounded-full p-2 w-full' type="text" placeholder='Username*' />
+                                <input value={password} onChange={(e) => setPassword(e.target.value)} className='px-4 my-2 bg-transparent outline-none border-2 border-gray-500 rounded-full p-2 w-full' type="text" placeholder='Password*' />
+                                <input value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className='px-4 my-2 bg-transparent outline-none border-2 border-gray-500 rounded-full p-2 w-full' type="text" placeholder='Confirm password*' />
                                 <div className=' flex flex-col md:flex-row gap-x-4'>
-                                    <TextField
-                                        label="First Name"
-                                        variant="outlined"
-                                        fullWidth
-                                        margin="normal"
-                                        name="firstname"
-                                        type="text"
-                                        onChange={(e) => setFirstname(e.target.value)}
-                                        value={firstname}
-                                        className={" font-normal"}
-                                    />
-                                    <TextField
-                                        label="Last Name"
-                                        variant="outlined"
-                                        fullWidth
-                                        margin="normal"
-                                        name="lastname"
-                                        type="text"
-                                        onChange={(e) => setLastname(e.target.value)}
-                                        value={lastname}
-                                        className={" font-normal"}
-                                    />
+                                    <input value={firstname} onChange={(e) => setFirstname(e.target.value)} className='px-4 my-2 bg-transparent outline-none border-2 border-gray-500 rounded-full p-2 w-full' type="text" placeholder='First Name' />
+                                    <input value={lastname} onChange={(e) => setLastname(e.target.value)} className='px-4 my-2 bg-transparent outline-none border-2 border-gray-500 rounded-full p-2 w-full' type="text" placeholder='Last Name*' />
                                 </div>
 
                                 <Button onClick={onSignUp} text="Submit" />

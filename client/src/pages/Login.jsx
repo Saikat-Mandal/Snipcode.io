@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, TextField, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import Layout from '../containers/Layout'
 import Button from '../components/Button';
-import { useDispatch } from "react-redux"
-import { updateToken } from "../feature/todo/userSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { addDp, updateToken } from "../feature/todo/userSlice"
 import axios from 'axios';
 
 function Login() {
@@ -16,6 +16,15 @@ function Login() {
 
     const navigate = useNavigate()
 
+    const getUserData = async () => {
+        try {
+            const res = await axios.get("http://localhost:4000/auth/getuserbyid", { withCredentials: true })
+            dispatch(addDp(res.data.dp))
+
+        } catch (error) {
+            alert(error)
+        }
+    }
 
     // register function 
     const onLogin = async () => {
@@ -29,6 +38,7 @@ function Login() {
             alert(res.data.message)
             dispatch(updateToken(res.data.token))
             navigate("/home")
+            getUserData();
         } catch (error) {
             alert(error)
             setEmail("")
@@ -37,49 +47,29 @@ function Login() {
     }
 
 
+
     return (
         <Layout>
-            <div className='w-full h-screen'>
+            <div className=' w-full h-screen'>
                 <div className=' w-full flex justify-center h-screen mt-20'>
                     <div className="flex md:w-1/3 ">
                         <Container>
                             <div className=' text-center'>
-                                <h1 className=' text-3xl font-medium'>Code laborator</h1>
+                                <h1 className=' text-3xl font-medium'>Snipcode.io</h1>
                             </div>
                             <div className=' mt-10'>
                                 <Typography variant="h5" gutterBottom className=" font-bold">
                                     Login
                                 </Typography>
-                                <form >
-                                    <TextField
-                                        required
-                                        label="Email or Username"
-                                        variant="outlined"
-                                        fullWidth
-                                        margin="normal"
-                                        name="email"
-                                        type="text"
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        value={email}
-                                        className={" text-white font-normal"}
-                                    />
-                                    <TextField
-                                        required
-                                        label="Password"
-                                        variant="outlined"
-                                        fullWidth
-                                        margin="normal"
-                                        name="password"
-                                        type="password"
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        value={password}
-                                        className={" font-normal"}
-                                    />
+                                <form className='' >
+                                    <input value={email} onChange={(e) => setEmail(e.target.value)} className='px-4 my-2 bg-transparent outline-none border-2 border-gray-500 rounded-full p-2 w-full' type="text" placeholder='Email*' />
+                                    <input value={password} onChange={(e) => setPassword(e.target.value)} className='px-4 my-2 bg-transparent outline-none border-2 border-gray-500 rounded-full p-2 w-full' type="text" placeholder='Password*' />
+
                                 </form>
                                 <Button onClick={onLogin} text="Login" />
                             </div>
 
-                            <p className=' py-6 text-center'>Don't have an account ? <Link to="/register" className=' text-blue-700 hover:underline' > Click here to Signup</Link> </p>
+                            <p className=' py-6'>Don't have an account ? <Link to="/register" className=' text-blue-700 hover:underline' > Click here to Signup</Link> </p>
                         </Container>
 
                     </div>

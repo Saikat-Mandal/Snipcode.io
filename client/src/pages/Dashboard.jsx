@@ -4,20 +4,22 @@ import Profiletabs from '../components/Profiletabs'
 import image from "../assets/shopping.png"
 import axios from 'axios';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { removeToken } from '../feature/todo/userSlice';
+import { GrLocation } from "react-icons/gr";
+import { LiaBirthdayCakeSolid } from "react-icons/lia";
+import { useDispatch, useSelector } from 'react-redux';
+import { addDp, removeDp, removeToken } from '../feature/todo/userSlice';
 function Dashboard() {
     const navigate = useNavigate()
 
     const [user, setUser] = useState(null)
 
     const dispatch = useDispatch()
-
     // logout function 
     const onLogout = async () => {
         try {
             await axios.get("http://localhost:4000/auth/logout", { withCredentials: true })
             dispatch(removeToken())
+            dispatch(removeDp())
             navigate("/")
         } catch (error) {
             alert(error)
@@ -28,6 +30,7 @@ function Dashboard() {
         const getUserData = async () => {
             try {
                 const res = await axios.get("http://localhost:4000/auth/getuserbyid", { withCredentials: true })
+                dispatch(addDp(res.data.dp))
                 setUser(res.data)
 
             } catch (error) {
@@ -51,26 +54,38 @@ function Dashboard() {
         },
 
     ]
+
+
+    const darkMode = useSelector(state => state.darkMode)
+    const backgroundColor = darkMode && " bg-zinc-900"
+    const textColor = darkMode && " text-white"
+    const hoverColor = darkMode && " hover:bg-zinc-700"
+
     return (
+
+
         <Layout>
             <div className='w-full h-screen flex justify-center relative'>
                 <img src={image} alt="" className='absolute right-0  -z-20' />
                 <img src={image} alt="" className='absolute -left-20  -z-20' />
-                <div className='w-2/3 p-6 flex shadow-2xl bg-white'>
+                <div className={backgroundColor + textColor + ' w-2/3 p-6 flex shadow-2xl bg-white transition duration-4000 ease-in-out'}>
                     {user ? <>
                         <div className='1/4'>
                             <div className=' h-64 w-64 border-2'>
                                 <img src={user.dp} alt="" />
                             </div>
+
                             <ul className='py-6 flex flex-col'>
                                 {
-                                    data.map(item => <Profiletabs key={item.id} title={item.title} path={item.path} />)
+                                    data.map(item => <Profiletabs key={item.id} title={item.title} path={item.path} hoverColor={hoverColor} textColor={textColor} />)
                                 }
-                                <li onClick={onLogout} className='py-1 rounded-full hover:bg-slate-200 px-2 cursor-pointer'>Logout</li>
+                                <li onClick={onLogout} className={' py-1 rounded-full hover:bg-slate-200 px-2 cursor-pointer' + hoverColor}>Logout</li>
                             </ul>
+
                         </div>
                         <Outlet />
                     </> : <p>Loading...</p>}
+
                 </div>
             </div>
         </Layout>

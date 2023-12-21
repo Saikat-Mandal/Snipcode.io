@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FaRegMessage, FaTrophy } from "react-icons/fa6";
 import { IoSearchSharp } from "react-icons/io5";
 import { PiArrowsInCardinalBold } from "react-icons/pi";
@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux"
 import { IoMdMoon } from "react-icons/io";
 import { turnOnDarkMode } from "../feature/todo/userSlice"
+
 function Header() {
     // const token = useSelector(state => state.token)
     // const isAuthenticated = useSelector(state => state.isAuthenticated)
@@ -17,11 +18,13 @@ function Header() {
         dispatch(turnOnDarkMode())
     }
 
+
     const backgroundColor = darkMode && " bg-zinc-900"
     const textColor = darkMode && " text-white"
+    const dp = useSelector(state => state.dp)
 
     return (
-        <header className={backgroundColor + textColor + ' p-6  flex items-center w-full '}>
+        <header className={backgroundColor + textColor + ' p-6  flex items-center w-full transition duration-4000 ease-in '}>
             <Link to="/home" className=' w-1/3 text-sm flex items-center gap-x-1'> <span className='text-2xl'><PiArrowsInCardinalBold /></span>Snipcode.io</Link>
             <div className='w-1/3 px--4 py-2 rounded-full border flex items-center gap-x-3' >
                 <IoSearchSharp className='ml-4 text-orange-600' />
@@ -34,7 +37,7 @@ function Header() {
                 <FaRegMessage />
                 <FaTrophy />
                 <Link to="/dashboard" className='h-10 w-10 border-2 border-gray-400 rounded-full'>
-                    <img className='h-full w-full' src="" alt="dp" />
+                    <img className='h-full w-full' src={dp} alt="dp" />
                 </Link>
             </div>
         </header>

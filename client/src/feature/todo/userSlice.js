@@ -6,6 +6,7 @@ export const userSlice = createSlice({
         token : null,
         isAuthenticated:false,
         darkMode:false,
+        dp:null
      },
     reducers :{
         updateToken: (state , action)=>{
@@ -20,10 +21,15 @@ export const userSlice = createSlice({
         turnOnDarkMode: (state , action)=>{
             state.darkMode = !state.darkMode
         },
-
+        addDp:(state , action)=>{
+            state.dp = action.payload
+        },
+        removeDp:(state , action)=>{
+            state.dp = null
+        }
     }
 })
 
-export const {updateToken , removeToken , turnOnDarkMode} = userSlice.actions
+export const {updateToken , removeToken , turnOnDarkMode , addDp , removeDp} = userSlice.actions
 
 export default userSlice.reducer

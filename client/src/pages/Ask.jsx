@@ -47,23 +47,23 @@ function Ask() {
 
     return (
         <Layout>
-            <div className=' w-full h-screen '>
+            <div className=' w-full min-h-screen '>
                 <div className='flex justify-center relative'>
                     <div className='w-4/6 '>
                         <h1 className='py-8 text-3xl font-extrabold'>Ask a public question </h1>
                         <div className='w-3/4 shadow-xl p-2'>
                             <h1 className='text-xl font-bold'>Title</h1>
                             <p className='text-xs py-2'>Be specific and imagine you're asking a question to another person</p>
-                            <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='e.g. What is an arrow function in javascript?' className='w-full p-2 rounded-full border text-xs' />
+                            <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='e.g. What is an arrow function in javascript?' className='bg-transparent w-full p-2 rounded-full border text-xs' />
                             <h1 className='pt-4 text-xl font-bold'>Body</h1>
                             <p className='py-2 text-xs'>Include all the information someone would need to answer your question</p>
-                            <div className=' w-full h-60 object-contain overflow-auto'>
+                            <div className=' w-full h-72 object-contain overflow-auto'>
                                 <ReactQuill theme="snow" value={body} onChange={setBody} className='h-full' />
                             </div>
                             {/* tags  */}
                             <h1 className='pt-4 text-xl font-bold'>Tags </h1>
-                            <p className='pb-2text-xs'>Add up to 5 tags to describe what your question is about</p>
-                            <input className='my-4 w-full p-2 rounded-full border text-xs' placeholder='e.g. (c# spring javascript)' value={tag} onChange={(e) => setTag(e.target.value)} />
+                            <p className='pb-2 text-xs'>Add up to 5 tags to describe what your question is about</p>
+                            <input className='my-4 w-full p-2 rounded-full border text-xs bg-transparent' placeholder='e.g. (c# spring javascript)' value={tag} onChange={(e) => setTag(e.target.value)} />
                             <div className='gap-x-4 flex pb-3'>
                                 {tagsArray.length > 0 ? tagsArray.map((item, index) => <Asktags id={index} onClick={removeTagFromArray} key={index} text={item} />) : <p className='text-xs pb-2'>No tags added</p>}
                             </div>

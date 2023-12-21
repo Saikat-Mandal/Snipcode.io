@@ -7,7 +7,7 @@ function Rightbar() {
     const backgroundColor = darkMode && " bg-zinc-900"
     const textColor = darkMode && " text-white"
     return (
-        <div className={backgroundColor + textColor + ' w-1/5 '}>
+        <div className={backgroundColor + textColor + ' w-1/5 transition duration-4000 ease-in'}>
             <RightbarContent title="The Overflow Blog " >
                 <p className='py-1 text-gray-500 text-xs flex items-center gap-x-2'><span><LuPencil /></span> Three types of AI-assisted programmers </p>
                 <p className='py-1 text-gray-500 text-xs flex items-center gap-x-2'><span><LuPencil /></span>  What Gemini means for the GenAI boom  </p>

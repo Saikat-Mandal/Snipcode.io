@@ -36,7 +36,7 @@ function Maincontent() {
     const textColor = darkMode && " text-white"
 
     return (
-        <div className={backgroundColor + textColor + ' w-3/5 h-screen overflow-auto rounded-xl p-4'}>
+        <div className={backgroundColor + textColor + ' w-3/5 h-screen overflow-auto rounded-xl p-4 transition duration-4000 ease-in'}>
             <h1 className='px-4 text-3xl text-gray-600 pb-4'> Top Questions </h1>
 
             <div className='px-4 flex items-center justify-between '>
