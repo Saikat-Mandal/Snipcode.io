@@ -108,7 +108,7 @@ exports.addCommentToQuestion=async(req,res)=>{
             comment : comment,
             userId:userId
         }
-        
+        const user = await UserModel.findById(userId)
         const newComment = await CommentModel.create(newCommentObj) 
         // after the new comment is created 
         const question = await QuestionModel.findById(id)
@@ -117,6 +117,8 @@ exports.addCommentToQuestion=async(req,res)=>{
           }
         question.comments.push(newComment._id)
         await question.save();
+        user.comments.push(newComment._id)
+        await user.save()
         res.status(200).json({message : "Comment added successfully" } )
       
 

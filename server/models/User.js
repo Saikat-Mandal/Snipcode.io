@@ -34,8 +34,30 @@ const userSchema = new mongoose.Schema({
   },
   about:{
     type:String,
-    default:""
+    default:"",
+    required: false,
   },
+  location:{
+    type:String,
+    default:"",
+    required: false,
+  },
+  github:{
+    type:String,
+    default:"",
+     required: false,
+  },
+  twitter:{
+    type:String,
+    default:"",
+     required: false,
+  },
+  website:{
+    type:String,
+    default:"",
+     required: false,
+  },
+
   questions:[
     {
       type: mongoose.Types.ObjectId,
@@ -46,6 +68,12 @@ const userSchema = new mongoose.Schema({
     {
       type: mongoose.Types.ObjectId,
       ref:"Answers"
+    }
+  ],
+  comments:[
+    {
+      type: mongoose.Types.ObjectId,
+      ref:"Comments"
     }
   ]
 } ,{ timestamps: true});

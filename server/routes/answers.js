@@ -1,6 +1,5 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const UserModel = require("../models/user");
 const { postAnswerController, makeAnswerCorrect, updateUpvote, updateDownvote } = require("../controllers/answers");
 const { isLoggedIn } = require("../middlewares/auth");
 const router = express.Router();

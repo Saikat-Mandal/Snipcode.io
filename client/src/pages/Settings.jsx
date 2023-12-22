@@ -17,7 +17,16 @@ function Settings() {
     // updating 
     const onUpdate = async () => {
         try {
-            const res = await axios.put("http://localhost/user/update")
+            await axios.put("http://localhost:4000/auth/update", states, { withCredentials: true })
+            alert("updated successfully!")
+            setStates({
+                firstname: "",
+                lastname: "",
+                location: "",
+                github: "",
+                twitter: "",
+                website: "",
+            });
         } catch (error) {
             alert(error)
         }

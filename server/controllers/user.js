@@ -90,3 +90,29 @@ exports.getUserById = async(req,res)=>{
     res.status(500).json({message:"Internal server error"})
   }
 }
+
+exports.updateUser = async(req,res)=>{
+  try {
+    const userId = req.token.id
+
+    const obj = {}
+
+    for(let key in req.body){
+      if(req.body[key] != ""){
+        obj[key] = req.body[key] 
+      }
+    }
+
+    const user = await UserModel.findById(userId)
+     await UserModel.updateOne({_id :userId} , 
+      {
+        $set : obj
+      })
+
+    return res.status(200).json({message : "successfully updated"})
+
+
+  } catch (error) {
+    res.status(500).json({message:"Internal server error"})
+  }
+}

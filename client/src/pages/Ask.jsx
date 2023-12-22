@@ -63,7 +63,11 @@ function Ask() {
                             {/* tags  */}
                             <h1 className='pt-4 text-xl font-bold'>Tags </h1>
                             <p className='pb-2 text-xs'>Add up to 5 tags to describe what your question is about</p>
-                            <input className='my-4 w-full p-2 rounded-full border text-xs bg-transparent' placeholder='e.g. (c# spring javascript)' value={tag} onChange={(e) => setTag(e.target.value)} />
+                            <input onKeyDown={e => {
+                                if (e.key === "Enter") {
+                                    addTagToArray()
+                                }
+                            }} disabled={checkIfButtonShouldBeDisabled()} className='my-4 w-full p-2 rounded-full border text-xs bg-transparent' placeholder='e.g. (c# spring javascript)' value={tag} onChange={(e) => setTag(e.target.value)} />
                             <div className='gap-x-4 flex pb-3'>
                                 {tagsArray.length > 0 ? tagsArray.map((item, index) => <Asktags id={index} onClick={removeTagFromArray} key={index} text={item} />) : <p className='text-xs pb-2'>No tags added</p>}
                             </div>
