@@ -56,10 +56,12 @@ function Dashboard() {
     ]
 
 
+
     const darkMode = useSelector(state => state.darkMode)
     const backgroundColor = darkMode && " bg-zinc-900"
     const textColor = darkMode && " text-white"
     const hoverColor = darkMode && " hover:bg-zinc-700"
+    const dp = useSelector(state => state.dp)
 
     return (
 
@@ -71,8 +73,8 @@ function Dashboard() {
                 <div className={backgroundColor + textColor + ' w-2/3 p-6 flex shadow-2xl bg-white transition duration-4000 ease-in-out'}>
                     {user ? <>
                         <div className='1/4'>
-                            <div className=' h-64 w-64 border-2'>
-                                <img src={user.dp} alt="" />
+                            <div className=' h-64 w-64 border-2 overflow-hidden'>
+                                <img src={dp} alt="" className=' h-full w-full object-contain' />
                             </div>
 
                             <ul className='py-6 flex flex-col'>

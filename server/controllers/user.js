@@ -103,7 +103,7 @@ exports.updateUser = async(req,res)=>{
       }
     }
 
-    const user = await UserModel.findById(userId)
+    // const user = await UserModel.findById(userId)
      await UserModel.updateOne({_id :userId} , 
       {
         $set : obj

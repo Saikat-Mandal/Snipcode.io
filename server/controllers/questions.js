@@ -80,7 +80,10 @@ exports.updateUpvote = async(req,res)=>{
     try {
         const {id} = req.body
         const question = await QuestionModel.findById(id)
-        await QuestionModel.updateOne({_id:id} , { $set: { upvotes: question.upvotes+1 }})
+        await QuestionModel.updateOne({_id:id} , 
+        {
+            $set: { upvotes: question.upvotes+1 }
+        })
         res.status(200).json({message :"Added upvote"})
     } catch (error) {
         res.status(500).json({message:"Internal server error" , error : error})

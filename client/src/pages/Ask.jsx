@@ -6,6 +6,7 @@ import image from "../assets/comp.png"
 import { useNavigate } from 'react-router-dom';
 import axios from "axios"
 import Asktags from '../components/Asktags';
+
 function Ask() {
     // states for different values 
     const [body, setBody] = useState('');

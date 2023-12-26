@@ -36,8 +36,8 @@ function Header() {
                 </span>
                 <FaRegMessage />
                 <FaTrophy />
-                <Link to="/dashboard" className='h-10 w-10 border-2 border-gray-400 rounded-full'>
-                    <img className='h-full w-full' src={dp} alt="dp" />
+                <Link to="/dashboard" className='h-10 w-10 border-2 border-gray-400 rounded-full overflow-hidden '>
+                    <img className='h-full w-full object-contain' src={dp} alt="dp" />
                 </Link>
             </div>
         </header>
