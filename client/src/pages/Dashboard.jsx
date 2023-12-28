@@ -70,23 +70,36 @@ function Dashboard() {
             <div className='w-full h-screen flex justify-center relative'>
                 <img src={image} alt="" className='absolute right-0  -z-20' />
                 <img src={image} alt="" className='absolute -left-20  -z-20' />
-                <div className={backgroundColor + textColor + ' w-2/3 p-6 flex shadow-2xl bg-white transition duration-4000 ease-in-out'}>
-                    {user ? <>
-                        <div className='1/4'>
-                            <div className=' h-64 w-64 border-2 overflow-hidden'>
-                                <img src={dp} alt="" className=' h-full w-full object-contain' />
+                <div className={backgroundColor + textColor + ' w-2/3 p-6 flex shadow-2xl bg-white transition duration-4000 ease-in-out flex'}>
+                    <div className='1/4'>
+                        <div className=' h-64 w-64 border-2 overflow-hidden'>
+                            <img src={dp} alt="" className=' h-full w-full object-contain' />
+                        </div>
+
+                        <ul className='py-6 flex flex-col cursor-pointer'>
+                            {
+                                data.map(item => <Profiletabs key={item.id} title={item.title} path={item.path} hoverColor={hoverColor} textColor={textColor} />)
+                            }
+                            <li onClick={onLogout} className={' py-1 rounded-full hover:bg-slate-200 px-2 cursor-pointer' + hoverColor}>Logout</li>
+                        </ul>
+                    </div>
+                    <div className='w-full'>
+                        <div className=' p-4'>
+                            <h1 className='text-5xl'>{user?.firstname + " " + user?.lastname}</h1>
+                            <div className='flex items-center py-4 gap-x-4'>
+                                <div className='flex items-center gap-x-2 text-orange-600'>
+                                    <LiaBirthdayCakeSolid />
+                                    <p className='text-gray-600'>{user?.createdAt}</p>
+                                </div>
+                                <div className='flex items-center gap-x-2 text-orange-600'>
+                                    <GrLocation />
+                                    <p className='text-gray-600'>Pune</p>
+                                </div>
                             </div>
 
-                            <ul className='py-6 flex flex-col'>
-                                {
-                                    data.map(item => <Profiletabs key={item.id} title={item.title} path={item.path} hoverColor={hoverColor} textColor={textColor} />)
-                                }
-                                <li onClick={onLogout} className={' py-1 rounded-full hover:bg-slate-200 px-2 cursor-pointer' + hoverColor}>Logout</li>
-                            </ul>
-
+                            <Outlet />
                         </div>
-                        <Outlet />
-                    </> : <p>Loading...</p>}
+                    </div>
 
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FaRegMessage, FaTrophy } from "react-icons/fa6";
 import { IoSearchSharp } from "react-icons/io5";
 import { PiArrowsInCardinalBold } from "react-icons/pi";
@@ -10,8 +10,8 @@ import { turnOnDarkMode } from "../feature/todo/userSlice"
 
 function Header() {
     // const token = useSelector(state => state.token)
-    // const isAuthenticated = useSelector(state => state.isAuthenticated)
     const darkMode = useSelector(state => state.darkMode)
+    const isAuthenticated = useSelector(state => state.isAuthenticated)
 
     const dispatch = useDispatch()
     const changeDarkMode = () => {
@@ -25,7 +25,7 @@ function Header() {
 
     return (
         <header className={backgroundColor + textColor + ' p-6  flex items-center w-full transition duration-4000 ease-in '}>
-            <Link to="/home" className=' w-1/3 text-sm flex items-center gap-x-1'> <span className='text-2xl'><PiArrowsInCardinalBold /></span>Snipcode.io</Link>
+            <Link to="/home" className=' w-1/3 text-sm flex items-center gap-x-1'> <span className='text-2xl'><PiArrowsInCardinalBold /></span>AskIT.io</Link>
             <div className='w-1/3 px--4 py-2 rounded-full border flex items-center gap-x-3' >
                 <IoSearchSharp className='ml-4 text-orange-600' />
                 <input type="text" placeholder='search ' className='w-full outline-none bg-transparent ' />
@@ -36,9 +36,11 @@ function Header() {
                 </span>
                 <FaRegMessage />
                 <FaTrophy />
-                <Link to="/dashboard" className='h-10 w-10 border-2 border-gray-400 rounded-full overflow-hidden '>
-                    <img className='h-full w-full object-contain' src={dp} alt="dp" />
-                </Link>
+                {
+                    isAuthenticated && <Link to="/dashboard" className='h-10 w-10 border-2 border-gray-400 rounded-full overflow-hidden '>
+                        <img className='h-full w-full object-contain' src={dp} alt="dp" />
+                    </Link>
+                }
             </div>
         </header>
     )

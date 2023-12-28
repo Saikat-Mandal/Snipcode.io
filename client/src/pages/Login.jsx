@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Container, TextField, Typography } from '@mui/material';
+import React, { useState } from 'react'
+import { Container, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import Layout from '../containers/Layout'
 import Button from '../components/Button';
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { addDp, updateToken } from "../feature/todo/userSlice"
 import axios from 'axios';
 
@@ -55,7 +55,7 @@ function Login() {
                     <div className="flex md:w-1/3 ">
                         <Container>
                             <div className=' text-center'>
-                                <h1 className=' text-3xl font-medium'>Snipcode.io</h1>
+                                <h1 className=' text-3xl font-medium'>AskIT.io</h1>
                             </div>
                             <div className=' mt-10'>
                                 <Typography variant="h5" gutterBottom className=" font-bold">

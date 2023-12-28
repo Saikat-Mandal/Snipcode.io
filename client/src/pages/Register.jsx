@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, TextField, Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import Layout from '../containers/Layout'
 import Button from '../components/Button';
@@ -39,7 +39,7 @@ function Register() {
                 <div className="flex md:w-1/3 ">
                     <Container>
                         <div className=' text-center'>
-                            <h1 className=' text-3xl font-medium'>Code laborator</h1>
+                            <h1 className=' text-3xl font-medium'>AskIt.io</h1>
                         </div>
                         <div >
                             <Typography variant="h5" gutterBottom className=" font-bold">

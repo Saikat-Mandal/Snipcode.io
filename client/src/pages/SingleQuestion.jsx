@@ -178,11 +178,6 @@ function SingleQuestion() {
                                     />
                                 }) : <p className='text-xs text-gray-400' >No answers yet</p>}
                             </div>
-                            <p>Add an answer:</p>
-                            <div className=' w-full h-60 object-contain overflow-auto'>
-                                <ReactQuill theme="snow" value={thisBody} onChange={setThisBody} className='h-full' />
-                            </div>
-                            <button onClick={postAnswer} className=' px-3 py-1 text-xs hover:scale-105 bg-blue-600 text-white rounded-full my-3'>Add your answer</button>
                         </div>
 
                         {/* comments  */}
@@ -205,6 +200,11 @@ function SingleQuestion() {
                             <input value={comment} onChange={(e) => setComment(e.target.value)} className=' rounded-full text-xs p-2 border' placeholder='Add a comment...' />
                             <button onClick={postComment} className=' px-3 py-1 text-xs hover:scale-105 bg-blue-600 text-white rounded-full ml-3'>Add</button>
                         </div>
+                        <p>Add an answer:</p>
+                        <div className=' w-full h-60 object-contain overflow-auto'>
+                            <ReactQuill theme="snow" value={thisBody} onChange={setThisBody} className='h-full' />
+                        </div>
+                        <button onClick={postAnswer} className=' px-3 py-1 text-xs hover:scale-105 bg-blue-600 text-white rounded-full my-3'>Add your answer</button>
                         {/* appreciation  */}
                         <div className=' bg-slate-600 rounded-lg p-3 text-sm'>
                             <p className=' text-white'>Your contribution to Snipcode.io is of great enrichment to our community. Your expertise and generosity in sharing insights,
