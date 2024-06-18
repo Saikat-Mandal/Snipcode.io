@@ -1,6 +1,6 @@
 const CommentModel = require("../models/Comments")
 const QuestionModel = require("../models/Question")
-const UserModel = require("../models/user")
+const UserModel = require("../models/Users")
 
 
 // get all the questions 

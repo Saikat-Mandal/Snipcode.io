@@ -1,4 +1,4 @@
-const UserModel = require("../models/user");
+const UserModel = require("../models/Users");
 const jwt = require("jsonwebtoken")
 
 exports.registerController = async (req,res)=>{

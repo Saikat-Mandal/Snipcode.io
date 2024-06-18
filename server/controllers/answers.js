@@ -1,6 +1,6 @@
 const AnswerModel = require("../models/Answers")
 const QuestionModel = require("../models/Question")
-const UserModel = require("../models/user")
+const UserModel = require("../models/Users")
 
 
 // post a new answer 
