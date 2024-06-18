@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // connect to mongoDb
 mongoose
-  .connect("mongodb://0.0.0.0:27017/labDb", {})
+  .connect(process.env.MONGO_URL, {})
   .then(() => console.log("successfully connected to database"))
   .catch((err) => console.log(err));
 
@@ -33,8 +33,9 @@ app.use("/auth" ,authRoutes)
 app.use("/question" ,questionRoutes)
 app.use("/answer" ,answersRoutes)
 
+const port = process.env.PORT || 4000
 
 // app listen
-app.listen(process.env.PORT, () =>
-  console.log(`listening to port ${process.env.PORT}`)
+app.listen(port, () =>
+  console.log(`listening to port ${port}`)
 );
